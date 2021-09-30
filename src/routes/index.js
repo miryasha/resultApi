@@ -7,7 +7,6 @@ const limiter = require("../config/apiLimiter.confic");
 //===API===
 //Stock routes
 ////////////===========
-router.use("/tickersforcalling", controllers.tickersForCalling);
 router.use("/api/result", controllers.resultApi);
 
 
