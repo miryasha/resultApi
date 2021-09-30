@@ -4,20 +4,15 @@ const router = require("express").Router();
 
 
 
-router.get('/:symbol' ,getAll)
-router.get('/:symbol/date/:dateS' ,getByDate)
-router.get('/:symbol/dates/:dateS/:dateE' ,getBetweenDates)
-router.get('/:symbol/ides/:firstId/:secondId' ,getBetweenIdes)
+router.get('/strategy/:strategy/:status/:by' , get)
 
 
-
-function getAll(req, res){
- const { symbol } = req.params;
-    
-    model.stockApi.getAll(symbol)
-    .then((stock) => {
-        
-        res.json(stock)
+function get(req, res) {   
+    const { strategy, status, by } =  req.params; 
+     
+    model.resultApi.get(strategy ,{status:status, by:by})
+    .then((strategy) => {
+        res.json(strategy)
         res.status(201)
         .end()
     })
@@ -28,67 +23,28 @@ function getAll(req, res){
         .end()
          
     })
-
-};
-
-
-function getByDate(req, res){
-    const { symbol, dateS } = req.params;
        
-       model.stockApi.getByDate(symbol, dateS)
-       .then((stock) => {
-           
-           res.json(stock)
-           res.status(201)
-           .end()
-       })
-       .catch(err => {
-           console.log(err)
-           res.send( { message: "Somthing went wrong !!" })
-           res.status(500)
-           .end()
-            
-       })         
-}
-  
-function getBetweenDates(req, res){
-        const { symbol, dateS, dateE } = req.params;
-           
-           model.stockApi.getBetweenDates(symbol, dateS, dateE)
-           .then((stock) => {
-               
-               res.json(stock)
-               res.status(201)
-               .end()
-           })
-           .catch(err => {
-               console.log(err)
-               res.send( { message: "Somthing went wrong !!" })
-               res.status(500)
-               .end()
-                
-           })         
-}
+ }
 
-function getBetweenIdes(req, res){
-    const { symbol, firstId, secondId } = req.params;
+
+ function getBySymbol (req, res) {   
+    const { strategy, symbol } =  req.params; 
+    
+    model.resultApi.getBySymbol( strategy, symbol)
+    .then((strategy) => {
+        res.json(strategy)
+        res.status(201)
+        .end()
+    })
+    .catch(err => {
+        console.log(err)
+        res.send( { message: "Somthing went wrong !!" })
+        res.status(500)
+        .end()
+         
+    })
        
-       model.stockApi.getBetweenIdes(symbol, firstId, secondId)
-       .then((stock) => {
-           
-           res.json(stock)
-           res.status(201)
-           .end()
-       })
-       .catch(err => {
-           console.log(err)
-           res.send( { message: "Somthing went wrong !!" })
-           res.status(500)
-           .end()
-            
-       })         
-}
-
+ }
 
 
 module.exports = router
