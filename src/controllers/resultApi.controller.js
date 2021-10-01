@@ -9,7 +9,7 @@ router.get('/strategy/:strategy/:status/:by' , get)
 
 function get(req, res) {   
     const { strategy, status, by } =  req.params; 
-     console.log( strategy, status, by)
+     
     model.resultApi.get(strategy ,{status:status, by:by})
     .then((strategy) => {
         res.json(strategy)
