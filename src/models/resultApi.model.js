@@ -3,7 +3,7 @@
     const Base = require("./base.model");
     const CryptoJS = require("crypto-js");
     const mysql = require("mysql");
-    const fetch = require('node-fetch');
+ 
     require('dotenv').config();
     const key = process.env.ALPHA_KEY;
     const dbKey = process.env.PASS_HASH_DATABASE;
