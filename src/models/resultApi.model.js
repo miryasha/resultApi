@@ -44,6 +44,11 @@
         get(strategy_name, args){
     
           return  this.findStrategyDataBaseInfo(strategy_name)
+          .catch(err => {
+            console.log(err);
+           
+         })
+
            .then( async (list) => {  
       
                 if( list.length !== 0){
@@ -111,7 +116,11 @@
                     }
                     
                   
-          })//endt of then
+          })
+          .catch(err => {
+            console.log(err);
+           
+         });
           
      };
     
@@ -132,7 +141,11 @@
                     }
                 })
                 dbCongig.end()
-            });
+            })
+            .catch(err => {
+              console.log(err);
+             
+           })
     
         }
     
@@ -146,7 +159,11 @@
                     }
                 })
                 dbCongig.end()
-              });
+              })
+              .catch(err => {
+                console.log(err);
+               
+             });
     
         }
     
@@ -161,7 +178,11 @@
                 }
             })
             dbCongig.end()
-          });
+          })
+          .catch(err => {
+            console.log(err);
+           
+         });
     
        }
         
